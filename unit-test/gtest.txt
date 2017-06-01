@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.7)
+project(gtest-download)
+
+# Enable ExternalProject CMake module
+include(ExternalProject)
+
+externalproject_add(gtest
+    GIT_REPOSITORY https://github.com/google/googletest
+    TIMEOUT 10
+    SOURCE_DIR "${CMAKE_BINARY_DIR}/gtest-src"
+    BINARY_DIR "${CMAKE_BINARY_DIR}/gtest-build"
+    CONFIGURE_COMMAND ""
+    BUILD_COMMAND     ""
+    INSTALL_COMMAND   ""
+    TEST_COMMAND      "")
