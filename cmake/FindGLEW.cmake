@@ -18,10 +18,11 @@ if(MSVC)
 
     find_library(GLEW_LIBRARY
         NAMES
-            glew GLEW glew32s
+            glew GLEW glew32
         PATHS
             $ENV{PROGRAMFILES}/GLEW/lib
             $ENV{GLEW_ROOT_DIR}/lib/Release/x64
+            $ENV{GLEW_ROOT_DIR}/bin/Release/x64
             ${PROJECT_SOURCE_DIR}/src/nvgl/glew/bin
             ${PROJECT_SOURCE_DIR}/src/nvgl/glew/lib
         DOC
@@ -47,6 +48,7 @@ else()
             /usr/local/lib
             /sw/lib
             /opt/local/lib
+            $ENV{GLEW_ROOT_DIR}/bin/Release/x64
         DOC
             "The GLEW library")
 endif()

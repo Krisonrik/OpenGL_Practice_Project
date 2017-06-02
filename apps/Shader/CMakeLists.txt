@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.7)
-project(Hello_Triangle_Excercise_01)
+project(Shader)
 
 set(PROJECT_SRCS
-${PROJECT_SOURCE_DIR}/src/Hello_Triangle_Excercise_01.cpp
+${PROJECT_SOURCE_DIR}/src/Shader.cpp
 )
 
 find_package( OpenCV REQUIRED )
@@ -19,7 +19,7 @@ target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
                           ${GLEW_INCLUDE_PATH}
                           ${OPENGL_INCLUDE_DIR})
 
-target_link_libraries(${PROJECT_NAME} glfw ${GLEW_LIBRARY} ${OPENGL_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} loadShader glfw ${GLEW_LIBRARY} ${OPENGL_LIBRARIES})
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY FOLDER ${CMAKE_PROJECT_NAME}/apps)
 
