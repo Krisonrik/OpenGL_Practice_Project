@@ -65,19 +65,19 @@ int main()
   float vertices[] = {
       // positions         // colors
       0.5f,
-      -0.5f,
+      0.5f,
       0.0f,
       1.0f,
       0.0f,
       0.0f,  // bottom right
       -0.5f,
-      -0.5f,
+      0.5f,
       0.0f,
       0.0f,
       1.0f,
       0.0f,  // bottom left
       0.0f,
-      0.5f,
+      -0.5f,
       0.0f,
       0.0f,
       0.0f,
@@ -94,8 +94,8 @@ int main()
   unsigned int shaderProgram;
   //    GLuint shaderProgram;
   loadShader currentShader;
-  shaderProgram =
-      currentShader.loadShaders("vertex_shader.glsl", "fragment_shader.glsl");
+  shaderProgram = currentShader.loadShaders("vertex_shader_excercise3.glsl",
+                                            "fragment_shader_excercise3.glsl");
 
   // EBO setup
   unsigned int VBO, VAO, EBO;
@@ -121,10 +121,10 @@ int main()
       1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
   glEnableVertexAttribArray(1);
 
-  GLint nrAttributes;
-  glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
-  std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes
-            << std::endl;
+  // GLint nrAttributes;
+  // glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
+  // std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes
+  //          << std::endl;
 
   float r = 0.1f;
   float g = 0.5f;
@@ -145,12 +145,10 @@ int main()
     // use linked shader program and draw a triangle
     glUseProgram(shaderProgram);
 
-    // float timeValue         = float(glfwGetTime());
-    // float greenValue        = (sin(timeValue) / 2.0f) + 0.5f;
-    // int vertexColorLocation = glGetUniformLocation(shaderProgram,
-    // "ourColor");
-    // glUseProgram(shaderProgram);
-    // glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+    // float timeValue    = float(glfwGetTime());
+    // float offsetVal    = (sin(timeValue) / 2.0f);
+    // int offsetLocation = glGetUniformLocation(shaderProgram, "offsetPos");
+    // glUniform1f(offsetLocation, 0.5f);
 
     // glDrawArrays(GL_TRIANGLES, 0, 3);
 

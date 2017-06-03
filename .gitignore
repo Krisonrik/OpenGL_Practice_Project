@@ -33,3 +33,6 @@
 
 # Builds
 build/*
+
+# Resources
+resources/*

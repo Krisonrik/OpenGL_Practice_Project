@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.7)
-project(loadShader)
+project(stb_image)
 
 if(MSVC)
   set(DLLIMPORT "__declspec(dllimport)")
@@ -9,31 +9,26 @@ if(MSVC)
 endif()
 
 set(PROJECT_SRCS
-${PROJECT_SOURCE_DIR}/src/loadShader.cpp
+${PROJECT_SOURCE_DIR}/src/stb_image.cpp
 )
 
 set(PROJECT_INCS
-${PROJECT_SOURCE_DIR}/include/hvr/loadShader/loadShader.hpp
+${PROJECT_SOURCE_DIR}/include/hvr/stb_image/stb_image.h
+
 )
 
-set(PROJECT_SHAD
-${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader.glsl
-${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_excercise2.glsl
-${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_excercise3.glsl
-${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader.glsl
-${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_excercise3.glsl
-)
+
 
 source_group("include" FILES ${PROJECT_INCS})
 source_group("src"     FILES ${PROJECT_SRCS})
-source_group("shader" FILES ${PROJECT_SHAD})
+
 
 find_package( OpenCV REQUIRED )
 find_package(glfw3 REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(OpenGL REQUIRED)
 
-add_library(${PROJECT_NAME} SHARED ${PROJECT_SRCS} ${PROJECT_INCS} ${PROJECT_SHAD})
+add_library(${PROJECT_NAME} SHARED ${PROJECT_SRCS} ${PROJECT_INCS})
 
 target_compile_definitions(${PROJECT_NAME} PUBLIC
                           HVR_WINDOWS_DISABLE_ALL_WARNING=${DISABLE}
@@ -74,22 +69,3 @@ export(TARGETS ${PROJECT_NAME}
 file(APPEND
     ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}Config.cmake
     "set(HVR_SAMPLE_LIBRARIES \${HVR_SAMPLE_LIBRARIES} ${PROJECT_NAME})\n")
-
-if(MSVC)
-  add_custom_command(TARGET loadShader POST_BUILD
-              COMMAND ${CMAKE_COMMAND} -E copy_directory
-              ${PROJECT_SOURCE_DIR}/include/hvr/glsl/
-              ${CMAKE_BINARY_DIR}/bin/$<CONFIGURATION>)
-elseif((CMAKE_CXX_COMPILER_ID MATCHES "Clang") OR CMAKE_COMPILER_IS_GNUCC
-    OR CMAKE_COMPILER_IS_GNUCXX)
-
-  file(GLOB DENOISE_IMAGES ${PROJECT_SOURCE_DIR}/data/Denoise/*)
-
-  file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/denoisedata.cmake
-    "file(COPY ${DENOISE_IMAGES} DESTINATION
-    ${CMAKE_CURRENT_BINARY_DIR}/data/Denoise
-    FILE_PERMISSIONS OWNER_READ OWNER_WRITE GROUP_WRITE GROUP_READ WORLD_READ)")
-
-  add_custom_command(TARGET DenoiseTest POST_BUILD COMMAND ${CMAKE_COMMAND}
-                  -P ${CMAKE_CURRENT_BINARY_DIR}/denoisedata.cmake)
-endif()

@@ -65,19 +65,19 @@ int main()
   float vertices[] = {
       // positions         // colors
       0.5f,
-      -0.5f,
+      0.5f,
       0.0f,
       1.0f,
       0.0f,
       0.0f,  // bottom right
       -0.5f,
-      -0.5f,
+      0.5f,
       0.0f,
       0.0f,
       1.0f,
       0.0f,  // bottom left
       0.0f,
-      0.5f,
+      -0.5f,
       0.0f,
       0.0f,
       0.0f,
@@ -94,8 +94,8 @@ int main()
   unsigned int shaderProgram;
   //    GLuint shaderProgram;
   loadShader currentShader;
-  shaderProgram =
-      currentShader.loadShaders("vertex_shader.glsl", "fragment_shader.glsl");
+  shaderProgram = currentShader.loadShaders("vertex_shader_excercise2.glsl",
+                                            "fragment_shader.glsl");
 
   // EBO setup
   unsigned int VBO, VAO, EBO;
@@ -145,12 +145,11 @@ int main()
     // use linked shader program and draw a triangle
     glUseProgram(shaderProgram);
 
-    // float timeValue         = float(glfwGetTime());
-    // float greenValue        = (sin(timeValue) / 2.0f) + 0.5f;
-    // int vertexColorLocation = glGetUniformLocation(shaderProgram,
-    // "ourColor");
+    float timeValue    = float(glfwGetTime());
+    float offsetVal    = (sin(timeValue) / 2.0f);
+    int offsetLocation = glGetUniformLocation(shaderProgram, "offsetPos");
     // glUseProgram(shaderProgram);
-    // glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+    glUniform1f(offsetLocation, offsetVal);
 
     // glDrawArrays(GL_TRIANGLES, 0, 3);
 

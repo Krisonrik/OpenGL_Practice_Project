@@ -13,6 +13,9 @@
 #include <GLFW/glfw3.h>
 #include "hvr/loadShader/loadShader.hpp"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "hvr/stb_image/stb_image.h"
+
 void key_callback(GLFWwindow* window, int key, int, int action, int)
 {
   // When a user presses the escape key, we set the WindowShouldClose property
@@ -61,7 +64,7 @@ int main()
 
   glViewport(0, 0, width, height);
 
-  // Square vertex array
+  // Triangle vertex array
   float vertices[] = {
       // positions         // colors
       0.5f,
@@ -83,6 +86,16 @@ int main()
       0.0f,
       1.0f  // top
   };
+  // Texture coordinate
+  float texCoords[] = {
+      0.0f,
+      0.0f,  // lower-left corner
+      1.0f,
+      0.0f,  // lower-right corner
+      0.5f,
+      1.0f  // top-center corner
+  };
+
   // Vertex Indices array
   unsigned int indices[] = {
       // note that we start from 0!
@@ -121,10 +134,10 @@ int main()
       1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
   glEnableVertexAttribArray(1);
 
-  GLint nrAttributes;
-  glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
-  std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes
-            << std::endl;
+  // GLint nrAttributes;
+  // glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
+  // std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes
+  //          << std::endl;
 
   float r = 0.1f;
   float g = 0.5f;
