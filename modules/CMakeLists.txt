@@ -3,3 +3,4 @@ project(modules)
 
 add_subdirectory(loadShader)
 add_subdirectory(stb_image)
+add_subdirectory(loadAssetDir)

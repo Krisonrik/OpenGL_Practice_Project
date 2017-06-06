@@ -16,6 +16,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "hvr/stb_image/stb_image.h"
 
+#include "tinyxml2.h"
+
 void key_callback(GLFWwindow* window, int key, int, int action, int)
 {
   // When a user presses the escape key, we set the WindowShouldClose property
