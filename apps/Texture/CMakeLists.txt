@@ -22,7 +22,7 @@ target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
                           ${TINYXML2_INCLUDE_DIRS}
                           )
 
-target_link_libraries(${PROJECT_NAME} loadShader stb_image glfw ${GLEW_LIBRARY} ${OPENGL_LIBRARIES} ${TINYXML2_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} loadShader loadAssetDir glfw ${GLEW_LIBRARY} ${OPENGL_LIBRARIES} ${TINYXML2_LIBRARIES})
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY FOLDER ${CMAKE_PROJECT_NAME}/apps)
 

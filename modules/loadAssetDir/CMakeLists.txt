@@ -17,7 +17,8 @@ ${PROJECT_SOURCE_DIR}/include/hvr/loadAssetDir/loadAssetDir.hpp
 )
 
 set(PROJECT_XML
-${PROJECT_SOURCE_DIR}/include/hvr/xml/test.xml
+#${PROJECT_SOURCE_DIR}/include/hvr/xml/test.xml
+${PROJECT_SOURCE_DIR}/include/hvr/xml/input.xml
 )
 
 source_group("include" FILES ${PROJECT_INCS})
@@ -29,8 +30,10 @@ find_package(glfw3 REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(tinyxml2 REQUIRED)
+find_package( glog REQUIRED )
 
-add_library(${PROJECT_NAME} SHARED ${PROJECT_SRCS} ${PROJECT_INCS} ${PROJECT_SHAD} )
+
+add_library(${PROJECT_NAME} SHARED ${PROJECT_SRCS} ${PROJECT_INCS} ${PROJECT_XML} )
 
 target_compile_definitions(${PROJECT_NAME} PUBLIC
                           HVR_WINDOWS_DISABLE_ALL_WARNING=${DISABLE}
@@ -52,7 +55,7 @@ target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
                           ${OPENGL_INCLUDE_DIR}
                           ${TINYXML2_INCLUDE_DIRS})
 
-target_link_libraries(${PROJECT_NAME} tinyxml2 glfw ${GLEW_LIBRARY} ${OPENGL_LIBRARIES} ${TINYXML2_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} glog::glog glfw ${GLEW_LIBRARY} ${OPENGL_LIBRARIES} ${TINYXML2_LIBRARIES})
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY
             FOLDER ${CMAKE_PROJECT_NAME}/modules)

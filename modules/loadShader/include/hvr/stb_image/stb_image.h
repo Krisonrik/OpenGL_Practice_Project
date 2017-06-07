@@ -100,6 +100,7 @@ RECENT REVISION HISTORY:
     Blazej Dariusz Roszkowski                  Gregory Mullen     github:phprus
 
 */
+HVR_WINDOWS_DISABLE_ALL_WARNING
 
 #ifndef STBI_INCLUDE_STB_IMAGE_H
 #define STBI_INCLUDE_STB_IMAGE_H

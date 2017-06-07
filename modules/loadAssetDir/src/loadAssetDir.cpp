@@ -1,60 +1,57 @@
-#include <stdio.h>
-#include <algorithm>
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <vector>
+// Copyright 2015 Jason Juang
 
-#include <GL/glew.h>
-#include <stdlib.h>
+HVR_WINDOWS_DISABLE_ALL_WARNING
+#include <tinyxml2.h>
+
+#include "glog/logging.h"
+HVR_WINDOWS_ENABLE_ALL_WARNING
 #include <string.h>
-
-#include "tinyxml2.h"
-
 #include "hvr/loadAssetDir/loadAssetDir.hpp"
 
 loadAssetDir::loadAssetDir(){};
 loadAssetDir::~loadAssetDir(){};
-void loadAssetDir::createXML()
+
+void loadAssetDir::loadXML(char* argv, std::string& str)
 {
-  tinyxml2::XMLDocument xmlDoc;
-  tinyxml2::XMLNode* pRoot = xmlDoc.NewElement("Root");
+  tinyxml2::XMLDocument doc_xml;
+  // int x;
+  // float y;
+  const char* dir;
 
-  xmlDoc.InsertFirstChild(pRoot);
-  xmlDoc.InsertFirstChild(pRoot);
-  tinyxml2::XMLElement* pElement = xmlDoc.NewElement("IntValue");
-
-  pElement->SetText(10);
-  pRoot->InsertEndChild(pElement);
-  pElement = xmlDoc.NewElement("FloatValue");
-  pElement->SetText(0.5f);
-
-  pRoot->InsertEndChild(pElement);
-
-  pElement = xmlDoc.NewElement("Date");
-  pElement->SetAttribute("day", 26);
-  pElement->SetAttribute("month", "April");
-  pElement->SetAttribute("year", 2014);
-  pElement->SetAttribute("dateFormat", "26/04/2014");
-
-  pRoot->InsertEndChild(pElement);
-
-  pElement = xmlDoc.NewElement("List");
-
-  for (const auto& item : vecList)
+  if (doc_xml.LoadFile(argv))
   {
-    tinyxml2::XMLElement* pListElement = xmlDoc.NewElement("Item");
-    pListElement->SetText(item);
-
-    pElement->InsertEndChild(pListElement);
+    LOG(ERROR) << "failed to load config file";
+    return;
   }
+  else
+  {
+    tinyxml2::XMLHandle xml(&doc_xml);
 
-  pElement->SetAttribute("itemCount", vecGroup.size());
+    // LOG(INFO) << xml.FirstChildElement("CONFIG")
+    //                 .FirstChildElement("VALUE")
+    //                 .FirstChildElement("dir")
+    //                 .ToElement()
+    //                 ->GetText();
+    dir = xml.FirstChildElement("CONFIG")
+              .FirstChildElement("VALUE")
+              .FirstChildElement("dir")
+              .ToElement()
+              ->GetText();
+    str.assign(dir);
+    // xml.FirstChildElement("CONFIG")
+    //    .FirstChildElement("VALUE")
+    //    .FirstChildElement("x")
+    //    .ToElement()
+    //    ->QueryIntText(&x);
+    // xml.FirstChildElement("CONFIG")
+    //    .FirstChildElement("VALUE")
+    //    .FirstChildElement("y")
+    //    .ToElement()
+    //    ->QueryFloatText(&y);
 
-  pRoot->InsertEndChild(pElement);
-
-  tinyxml2::XMLError eResult = xmlDoc.SaveFile("SavedData.xml");
-  tinyxml2::XMLCheckResult(eResult);
+    // LOG(INFO) << x;
+    // LOG(INFO) << y;
+  }
 
   return;
 }
