@@ -6788,12 +6788,34 @@ STBIDEF int stbi_info_from_callbacks(stbi_io_callbacks const *c, void *user, int
 
 #include "tinyxml2.h"
 
+float mixAmount = 0.2f;
+
 void key_callback(GLFWwindow* window, int key, int, int action, int)
 {
   // When a user presses the escape key, we set the WindowShouldClose property
   // to true, closing the application
-  if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-    glfwSetWindowShouldClose(window, GL_TRUE);
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
+        glfwSetWindowShouldClose(window, GL_TRUE);
+  }
+    if (key == GLFW_KEY_UP && action == GLFW_PRESS) {
+        if (mixAmount >= 1.0f) {
+            mixAmount = 1.0f;
+        }
+        else {
+            mixAmount += 0.1f;
+        }
+        std::cout << mixAmount << std::endl;
+    }
+    else if (key == GLFW_KEY_DOWN && action == GLFW_PRESS) {
+        if (mixAmount <= 0.0f) {
+            mixAmount = 0.0f;
+        }
+        else {
+            mixAmount -= 0.1f;
+        }
+        std::cout << mixAmount << std::endl;
+    }
+
 }
 
 void loadImg(const char *imgDirChar, unsigned int texture,unsigned int textureUnit, bool hasAlpha) {
@@ -6893,7 +6915,7 @@ int main()
   //    GLuint shaderProgram;
   loadShader currentShader;
   shaderProgram =
-      currentShader.loadShaders("vertex_shader_texture.glsl", "fragment_shader_texture.glsl");
+      currentShader.loadShaders("vertex_shader_texture.glsl", "fragment_shader_texture_excercise4.glsl");
 
   // EBO setup
   unsigned int VBO, VAO, EBO;
@@ -6968,8 +6990,6 @@ int main()
     glClearColor(r, g, b, a);
     glClear(GL_COLOR_BUFFER_BIT);
 
-
-
     // float timeValue         = float(glfwGetTime());
     // float greenValue        = (sin(timeValue) / 2.0f) + 0.5f;
     // int vertexColorLocation = glGetUniformLocation(shaderProgram,
@@ -6980,6 +7000,10 @@ int main()
     // glDrawArrays(GL_TRIANGLES, 0, 3);
 
     //glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+     // set it manually
+
+    glUseProgram(shaderProgram);
+    glUniform1f(glGetUniformLocation(shaderProgram, "mixAmount"), mixAmount);
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 

@@ -20,8 +20,11 @@ set(PROJECT_SHAD
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_excercise2.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_excercise3.glsl
+${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_texture.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_excercise3.glsl
+${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_texture.glsl
+${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_texture_excercise4.glsl
 )
 
 source_group("include" FILES ${PROJECT_INCS})
