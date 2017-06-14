@@ -23,6 +23,7 @@ ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_excercise3.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_texture.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_transformations.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_transformations_exercise_02.glsl
+${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_coordinate-systems.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_excercise3.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_texture.glsl
