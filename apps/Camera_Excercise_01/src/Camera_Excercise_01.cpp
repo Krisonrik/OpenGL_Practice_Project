@@ -6789,7 +6789,7 @@ STBIDEF int stbi_info_from_callbacks(stbi_io_callbacks const *c, void *user, int
 
 #include "hvr/loadAssetDir/loadAssetDir.hpp"
 #include "hvr/loadShader/loadShader.hpp"
-#include "hvr/cameraEuler/cameraEuler.hpp"
+#include "hvr/cameraEuler/cameraEuler_fps.hpp"
 
 #define STB_IMAGE_IMPLEMENTATION
 //#include "hvr/stb_image/stb_image.h"
@@ -6800,7 +6800,7 @@ STBIDEF int stbi_info_from_callbacks(stbi_io_callbacks const *c, void *user, int
 //glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 //glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
-cameraEuler curCam(glm::vec3(0.0f, 0.0f, 3.0f));
+cameraEuler_fps curCam(glm::vec3(0.0f, 0.0f, 3.0f));
 
 float deltaTime = 0.0f;	// Time between current frame and last frame
 float lastFrame = 0.0f; // Time of last frame
@@ -7144,7 +7144,7 @@ int main()
    //model = glm::rotate(model, glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
     //view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
     //view = glm::rotate(view, glm::radians(30.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-    projection = glm::perspective(glm::radians(cameraEuler::camDefault::ZOOM), float(screenWidth / screenHeight), 0.1f, 100.0f);
+    projection = glm::perspective(glm::radians(cameraEuler_fps::camDefault::ZOOM), float(screenWidth / screenHeight), 0.1f, 100.0f);
 
     int viewLoc = glGetUniformLocation(shaderProgram, "view");
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));

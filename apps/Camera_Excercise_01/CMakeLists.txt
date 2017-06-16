@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.7)
-project(Camera)
+project(Camera_Excercise_01)
 
 set(PROJECT_SRCS
-${PROJECT_SOURCE_DIR}/src/Camera.cpp
+${PROJECT_SOURCE_DIR}/src/Camera_Excercise_01.cpp
 )
 
 find_package( OpenCV REQUIRED )
