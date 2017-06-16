@@ -1,10 +1,19 @@
 HVR_WINDOWS_DISABLE_ALL_WARNING
 
+#include <stdio.h>
+#include <fstream>
+#include <iostream>
+#include <string>
+
 #include <GL/glew.h>
 #include <vector>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/ext.hpp>
+#include <glm/gtx/string_cast.hpp>
 
 HVR_WINDOWS_ENABLE_ALL_WARNING
 
@@ -59,7 +68,8 @@ cameraEuler_fps::~cameraEuler_fps()
 // Returns the view matrix calculated using Eular Angles and the LookAt Matrix
 glm::mat4 cameraEuler_fps::GetViewMatrix()
 {
-  return glm::lookAt(Position, Position + Front, Up);
+  // return glm::lookAt(Position, Position + Front, Up);
+  return myLookAt(Position, Position + Front, Up);
 }
 
 // Processes input received from any keyboard-like input system. Accepts input
@@ -150,8 +160,24 @@ glm::mat4 cameraEuler_fps::myLookAt(glm::vec3 position,
                                     glm::vec3 up)
 {
   glm::mat4 lookAtVec = glm::mat4();
-  lookAtVec           = glm::translate(lookAtVec, position);
-  // lookAtVec = glm::rotate(lookAtVec, glm::normalize(position - target), up);
 
+  glm::mat4 translate = glm::translate(lookAtVec, -position);
+  glm::vec3 camAim    = glm::normalize(position - target);
+  glm::vec3 camRight  = glm::cross(glm::normalize(up), camAim);
+  glm::vec3 camUp     = glm::cross(camAim, camRight);
+
+  glm::mat4 rotation;
+  rotation[0][0] = camRight.x;  // First column, first row
+  rotation[1][0] = camRight.y;
+  rotation[2][0] = camRight.z;
+  rotation[0][1] = camUp.x;  // First column, second row
+  rotation[1][1] = camUp.y;
+  rotation[2][1] = camUp.z;
+  rotation[0][2] = camAim.x;  // First column, third row
+  rotation[1][2] = camAim.y;
+  rotation[2][2] = camAim.z;
+  lookAtVec      = rotation * translate;
+
+  // std::cout << glm::to_string(lookAtVec) << std::endl;
   return lookAtVec;
 }
