@@ -58,7 +58,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
                           ${OpenCV_INCLUDE_DIRS}
-                          ${GLEW_INCLUDE_PATH}
+                          # ${GLEW_INCLUDE_PATH}
                           ${OPENGL_INCLUDE_DIR})
 
 target_link_libraries(${PROJECT_NAME} glfw ${GLEW_LIBRARY} ${OPENGL_LIBRARIES})

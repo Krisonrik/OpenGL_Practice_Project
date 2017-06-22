@@ -33,9 +33,9 @@ endif()
 
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
                           ${OpenCV_INCLUDE_DIRS}
-                          ${GLEW_INCLUDE_PATH}
+                          # ${GLEW_INCLUDE_PATH}
                           ${OPENGL_INCLUDE_DIR}
-                          ${TINYXML2_INCLUDE_DIRS}
+                          # ${TINYXML2_INCLUDE_DIRS}
                           )
 
 target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS} glm loadShader loadAssetDir cameraEuler glfw ${GLEW_LIBRARY} ${OPENGL_LIBRARIES} ${TINYXML2_LIBRARIES})

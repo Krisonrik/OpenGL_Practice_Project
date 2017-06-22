@@ -36,3 +36,6 @@ build/*
 
 # Resources
 resources/*
+
+# xml input file
+modules/loadAssetDir/include/hvr/xml/*
