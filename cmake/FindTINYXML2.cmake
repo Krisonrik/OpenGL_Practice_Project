@@ -15,7 +15,9 @@ set(PF    "PROGRAMFILES")
 # Look for header file.
 find_path(TINYXML2_INCLUDE_DIR
   NAMES tinyxml2.h
-  PATHS $ENV{${PFX86}}/tinyxml2/include
+  PATHS 
+        $ENV{VCPKG_ROOT_DIR}/installed/x64-windows/include
+        $ENV{${PFX86}}/tinyxml2/include
         $ENV{${PF}}/tinyxml2/include
         ${TINYXML2_ROOT_DIR}/tinyxml2/include
         /usr/local/include
@@ -25,7 +27,9 @@ find_path(TINYXML2_INCLUDE_DIR
 # Look for library.
 find_library(TINYXML2_LIBRARY
   NAMES libtinyxml2 tinyxml2
-  PATHS $ENV{${PFX86}}/tinyxml2/lib
+  PATHS 
+        $ENV{VCPKG_ROOT_DIR}/installed/x64-windows/lib
+        $ENV{${PFX86}}/tinyxml2/lib
         $ENV{${PF}}/tinyxml2/lib
         ${TINYXML2_ROOT_DIR}/tinyxml2/include
         /usr/local/lib

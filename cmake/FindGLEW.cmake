@@ -8,7 +8,7 @@
 
 if(MSVC)
     find_path(GLEW_INCLUDE_PATH GL/glew.h
-
+            $ENV{VCPKG_ROOT_DIR}/packages/glew_x64-windows/include
             $ENV{PROGRAMFILES}/GLEW/include
             $ENV{GLEW_ROOT_DIR}/include
             ${PROJECT_SOURCE_DIR}/src/nvgl/glew/include
@@ -20,6 +20,7 @@ if(MSVC)
         NAMES
             glew GLEW glew32
         PATHS
+            $ENV{VCPKG_ROOT_DIR}/packages/glew_x64-windows/lib
             $ENV{PROGRAMFILES}/GLEW/lib
             $ENV{GLEW_ROOT_DIR}/lib/Release/x64
             $ENV{GLEW_ROOT_DIR}/bin/Release/x64
@@ -30,7 +31,6 @@ if(MSVC)
 
 else()
     find_path(GLEW_INCLUDE_PATH GL/glew.h
-
             /usr/include
             /usr/local/include
             /sw/include
