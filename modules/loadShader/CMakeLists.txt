@@ -17,17 +17,19 @@ ${PROJECT_SOURCE_DIR}/include/hvr/loadShader/loadShader.hpp
 )
 
 set(PROJECT_SHAD
-${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader.glsl
-${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_excercise2.glsl
-${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_excercise3.glsl
-${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_texture.glsl
-${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_transformations.glsl
-${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_transformations_exercise_02.glsl
-${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_coordinate-systems.glsl
-${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader.glsl
-${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_excercise3.glsl
-${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_texture.glsl
-${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_texture_excercise4.glsl
+# ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader.glsl
+# ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_excercise2.glsl
+# ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_excercise3.glsl
+# ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_texture.glsl
+# ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_transformations.glsl
+# ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_transformations_exercise_02.glsl
+# ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_coordinate-systems.glsl
+${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_lighting_colors.glsl
+# ${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader.glsl
+# ${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_excercise3.glsl
+# ${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_texture.glsl
+# ${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_texture_excercise4.glsl
+${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_lighting_colors.glsl
 
 )
 
@@ -37,7 +39,7 @@ source_group("shader" FILES ${PROJECT_SHAD})
 
 find_package( OpenCV REQUIRED )
 find_package(glfw3 REQUIRED)
-find_package(GLEW REQUIRED)
+find_package(glew REQUIRED NO_MODULE)
 find_package(OpenGL REQUIRED)
 
 add_library(${PROJECT_NAME} SHARED ${PROJECT_SRCS} ${PROJECT_INCS} ${PROJECT_SHAD})
@@ -58,10 +60,10 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
                           ${OpenCV_INCLUDE_DIRS}
-                          # ${GLEW_INCLUDE_PATH}
+                          #${GLEW_INCLUDE_PATH}
                           ${OPENGL_INCLUDE_DIR})
 
-target_link_libraries(${PROJECT_NAME} glfw ${GLEW_LIBRARY} ${OPENGL_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} glfw GLEW::glew ${OPENGL_LIBRARIES})
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY
             FOLDER ${CMAKE_PROJECT_NAME}/modules)

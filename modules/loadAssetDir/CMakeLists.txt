@@ -27,7 +27,7 @@ source_group("xml" FILES ${PROJECT_XML})
 
 find_package( OpenCV REQUIRED )
 find_package(glfw3 REQUIRED)
-find_package(GLEW REQUIRED)
+find_package(glew REQUIRED NO_MODULE)
 find_package(OpenGL REQUIRED)
 find_package(tinyxml2 REQUIRED)
 find_package( glog REQUIRED )
@@ -51,11 +51,12 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
                           ${OpenCV_INCLUDE_DIRS}
-                          ${GLEW_INCLUDE_PATH}
+                          # ${GLEW_INCLUDE_PATH}
                           ${OPENGL_INCLUDE_DIR}
-                          ${TINYXML2_INCLUDE_DIRS})
+                          # ${TINYXML2_INCLUDE_DIRS}
+                          )
 
-target_link_libraries(${PROJECT_NAME} glog::glog glfw ${GLEW_LIBRARY} ${OPENGL_LIBRARIES} ${TINYXML2_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} glog::glog glfw GLEW::glew ${OPENGL_LIBRARIES} tinyxml2)
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY
             FOLDER ${CMAKE_PROJECT_NAME}/modules)

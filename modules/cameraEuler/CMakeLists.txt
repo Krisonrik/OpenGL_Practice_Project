@@ -25,7 +25,7 @@ source_group("src"     FILES ${PROJECT_SRCS})
 
 find_package( OpenCV REQUIRED )
 find_package(glfw3 REQUIRED)
-find_package(GLEW REQUIRED)
+find_package(glew REQUIRED NO_MODULE)
 find_package(OpenGL REQUIRED)
 find_package(glm REQUIRED)
 
@@ -52,10 +52,10 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
                           ${OpenCV_INCLUDE_DIRS}
-                          ${GLEW_INCLUDE_PATH}
+                          # ${GLEW_INCLUDE_PATH}
                           ${OPENGL_INCLUDE_DIR})
 
-target_link_libraries(${PROJECT_NAME} glm glfw ${GLEW_LIBRARY} ${OPENGL_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} glm glfw GLEW::glew ${OPENGL_LIBRARIES})
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY
             FOLDER ${CMAKE_PROJECT_NAME}/modules)
