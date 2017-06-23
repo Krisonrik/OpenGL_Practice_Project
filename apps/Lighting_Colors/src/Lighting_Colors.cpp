@@ -26,9 +26,6 @@ HVR_WINDOWS_DISABLE_ALL_WARNING
 #include "tinyxml2.h"
 
 HVR_WINDOWS_ENABLE_ALL_WARNING
-// glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
-// glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
-// glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
 cameraEuler curCam(glm::vec3(0.0f, 0.0f, 3.0f));
 
@@ -238,20 +235,28 @@ int main()
 
   // compile shader
   unsigned int shaderProgram;
+  unsigned int lightingProgram;
   //    GLuint shaderProgram;
   loadShader currentShader;
   shaderProgram = currentShader.loadShaders(
       "vertex_shader_coordinate-systems.glsl", "fragment_shader_texture.glsl");
 
+  loadShader lightingShader;
+  lightingProgram =
+      lightingShader.loadShaders("vertex_shader_lighting_colors.glsl",
+                                 "fragment_shader_lighting_colors.glsl");
+
   // EBO setup
-  unsigned int VBO, VAO;  // , EBO;
+  unsigned int VBO, VAO, lightVAO;  // , EBO;
   glGenVertexArrays(1, &VAO);
+  glGenVertexArrays(1, &lightVAO);
   glGenBuffers(1, &VBO);
   // glGenBuffers(1, &EBO);
 
   // ..:: Initialization code :: ..
   // 1. bind Vertex Array Object
   glBindVertexArray(VAO);
+  glBindVertexArray(lightVAO);
   // 2. copy our vertices array in a vertex buffer for OpenGL to use
   glBindBuffer(GL_ARRAY_BUFFER, VBO);
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -266,9 +271,6 @@ int main()
   glVertexAttribPointer(
       1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
   glEnableVertexAttribArray(1);
-
-  // glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float),
-  // (void*)(6 * sizeof(float)));  glEnableVertexAttribArray(2);
 
   loadAssetDir dirLoader;
   std::string assetDir;
@@ -294,6 +296,13 @@ int main()
   glUniform1i(glGetUniformLocation(shaderProgram, "ourTexture1"),
               0);  // set it manually
   glUniform1i(glGetUniformLocation(shaderProgram, "ourTexture2"), 1);
+
+  // we only need to bind to the VBO, the container's VBO's data already
+  // contains the correct data.
+  glBindBuffer(GL_ARRAY_BUFFER, VBO);
+  // set the vertex attributes (only position data for our lamp)
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+  glEnableVertexAttribArray(0);
 
   float timeDelate = 0.0f;
 
@@ -359,6 +368,16 @@ int main()
       // ourShader.setMat4("model", model);
 
       glDrawArrays(GL_TRIANGLES, 0, 36);
+
+      glUseProgram(lightingProgram);
+      glUniform3f(glGetUniformLocation(lightingProgram, "objectColor"),
+                  1.0f,
+                  0.5f,
+                  0.31f);
+      glUniform3f(glGetUniformLocation(lightingProgram, "lightColor"),
+                  1.0f,
+                  1.0f,
+                  1.0f);
     }
 
     // draw  in  wireframe mode
