@@ -172,9 +172,9 @@ int main()
   unsigned int lampProgram;
 
   loadShader lightingShader;
-  lightingProgram =
-      lightingShader.loadShaders("vertex_shader_lighting_basic.glsl",
-                                 "fragment_shader_lighting_basic.glsl");
+  lightingProgram = lightingShader.loadShaders(
+      "vertex_shader_lighting_basic_exercise_04.glsl",
+      "fragment_shader_lighting_basic_exercise_04.glsl");
 
   loadShader lampShader;
   lampProgram = lampShader.loadShaders("vertex_shader_lamp.glsl",
@@ -231,7 +231,7 @@ int main()
   float specularStrength    = 1.0f;
   float lightMovementRadius = 0.1f;
   float gloss               = 16;
-
+  glm::vec3 lightPosInView;
   // Program loop
   while (!glfwWindowShouldClose(window))
   {
@@ -255,6 +255,7 @@ int main()
                glm::vec3((float)glm::cos(glfwGetTime()) * lightMovementRadius,
                          (float)glm::cos(glfwGetTime()) * lightMovementRadius,
                          (float)glm::sin(glfwGetTime()) * lightMovementRadius);
+
     // std::cout << glm::to_string(lightPos) << std::endl;
     // glm::mat4 model;
     glm::mat4 view;
@@ -262,7 +263,21 @@ int main()
 
     view = curCam.GetViewMatrix();
 
+    lightPosInView = glm::vec3(view * glm::vec4(lightPos, 1.0f));
+
+    projection = glm::perspective(glm::radians(cameraEuler::camDefault::ZOOM),
+                                  float(screenWidth / screenHeight),
+                                  0.1f,
+                                  100.0f);
+
     glUseProgram(lightingProgram);
+
+    int viewLoc = glGetUniformLocation(lightingProgram, "view");
+    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+
+    int projectionLoc = glGetUniformLocation(lightingProgram, "projection");
+    glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
     glUniform3f(glGetUniformLocation(lightingProgram, "objectColor"),
                 1.0f,
                 0.5f,
@@ -272,9 +287,9 @@ int main()
                 lightColor_static.g,
                 lightColor_static.b);
     glUniform3f(glGetUniformLocation(lightingProgram, "lightPos"),
-                lightPos.x,
-                lightPos.y,
-                lightPos.z);
+                lightPosInView.x,
+                lightPosInView.y,
+                lightPosInView.z);
     glUniform3f(glGetUniformLocation(lightingProgram, "viewPos"),
                 curCam.getPosition().x,
                 curCam.getPosition().y,
@@ -284,16 +299,6 @@ int main()
     glUniform1f(glGetUniformLocation(lightingProgram, "specularStrength"),
                 specularStrength);
     glUniform1f(glGetUniformLocation(lightingProgram, "gloss"), gloss);
-
-    projection = glm::perspective(glm::radians(cameraEuler::camDefault::ZOOM),
-                                  float(screenWidth / screenHeight),
-                                  0.1f,
-                                  100.0f);
-
-    int viewLoc = glGetUniformLocation(lightingProgram, "view");
-    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-    int projectionLoc = glGetUniformLocation(lightingProgram, "projection");
-    glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
     glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);

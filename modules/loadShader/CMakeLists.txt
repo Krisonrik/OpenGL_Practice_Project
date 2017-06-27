@@ -26,6 +26,10 @@ ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_transformations_exercise_02
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_coordinate-systems.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_lighting_colors.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_lamp.glsl
+${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_lighting_basic.glsl
+${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_lighting_basic_exercise_03.glsl
+${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_lighting_basic_exercise_03.glsl
+${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_lighting_materials.glsl
 
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_excercise3.glsl
@@ -33,13 +37,17 @@ ${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_texture.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_texture_excercise4.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_lighting_colors.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_lamp.glsl
+${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_lighting_basic.glsl
+${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_lighting_basic_exercise_03.glsl
+${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_lighting_basic_exercise_04.glsl
+${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_lighting_materials.glsl
 )
 
 source_group("include" FILES ${PROJECT_INCS})
 source_group("src"     FILES ${PROJECT_SRCS})
 source_group("shader" FILES ${PROJECT_SHAD})
 
-find_package( OpenCV REQUIRED )
+find_package(OpenCV REQUIRED )
 find_package(glfw3 REQUIRED)
 find_package(glew REQUIRED NO_MODULE)
 find_package(OpenGL REQUIRED)

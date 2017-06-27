@@ -1,5 +1,5 @@
-#ifndef CAMERA_H
-#define CAMERA_H
+#ifndef CAMERA_HPP
+#define CAMERA_HPP
 
 #include <glm/glm.hpp>
 
@@ -53,6 +53,9 @@ class cameraEuler
                             GLboolean constrainPitch = true);
   HVR_RICHARD_CAMERAEULER_DLL
   void ProcessMouseScroll(float yoffset);
+
+  HVR_RICHARD_CAMERAEULER_DLL
+  glm::vec3 getPosition();
 
  private:
   // Camera Attributes

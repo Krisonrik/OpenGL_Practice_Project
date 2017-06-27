@@ -1,5 +1,5 @@
-#ifndef LOADIMG_H
-#define LOADIMG_H
+#ifndef LOADIMG_HPP
+#define LOADIMG_HPP
 
 class HVR_RICHARD_LOADIMG_DLL loadImg
 {
