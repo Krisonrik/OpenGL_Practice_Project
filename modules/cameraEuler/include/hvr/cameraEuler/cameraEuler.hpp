@@ -57,6 +57,15 @@ class cameraEuler
   HVR_RICHARD_CAMERAEULER_DLL
   glm::vec3 getPosition();
 
+  HVR_RICHARD_CAMERAEULER_DLL
+  glm::vec3 getFront();
+
+  HVR_RICHARD_CAMERAEULER_DLL
+  glm::vec3 getUp();
+
+  HVR_RICHARD_CAMERAEULER_DLL
+  glm::vec3 getRight();
+
  private:
   // Camera Attributes
   glm::vec3 Position;

@@ -106,9 +106,24 @@ void cameraEuler::ProcessMouseScroll(float yoffset)
   if (Zoom >= 45.0f) Zoom = 45.0f;
 }
 
-HVR_RICHARD_CAMERAEULER_DLL glm::vec3 cameraEuler::getPosition()
+glm::vec3 cameraEuler::getPosition()
 {
   return Position;
+}
+
+glm::vec3 cameraEuler::getFront()
+{
+  return Front;
+}
+
+glm::vec3 cameraEuler::getUp()
+{
+  return Up;
+}
+
+glm::vec3 cameraEuler::getRight()
+{
+  return Right;
 }
 
 void cameraEuler::updateCameraVectors()
