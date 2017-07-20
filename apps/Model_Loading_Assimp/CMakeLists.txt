@@ -16,6 +16,7 @@ find_package(glew REQUIRED NO_MODULE)
 find_package(OpenGL REQUIRED)
 find_package(tinyxml2 REQUIRED)
 find_package(glm REQUIRED)
+find_package(assimp REQUIRED)
 
 source_group("src" FILES ${PROJECT_SRCS})
 
@@ -38,7 +39,7 @@ target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
                           # ${TINYXML2_INCLUDE_DIRS}
                           )
 
-target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS} glm loadImg loadShader loadAssetDir cameraEuler glfw GLEW::glew tinyxml2 ${OPENGL_LIBRARIES} )
+target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS} assimp glm loadImg loadShader loadAssetDir cameraEuler glfw GLEW::glew tinyxml2 ${OPENGL_LIBRARIES} )
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY FOLDER ${CMAKE_PROJECT_NAME}/apps)
 

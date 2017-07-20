@@ -10,10 +10,12 @@ endif()
 
 set(PROJECT_SRCS
 ${PROJECT_SOURCE_DIR}/src/loadShader.cpp
+${PROJECT_SOURCE_DIR}/src/loadShaderNew.cpp
 )
 
 set(PROJECT_INCS
 ${PROJECT_SOURCE_DIR}/include/hvr/loadShader/loadShader.hpp
+${PROJECT_SOURCE_DIR}/include/hvr/loadShader/loadShaderNew.hpp
 )
 
 set(PROJECT_SHAD
@@ -66,10 +68,12 @@ target_compile_definitions(${PROJECT_NAME} PUBLIC
                           HVR_WINDOWS_ENABLE_ALL_WARNING=${ENABLE})
 
 target_compile_definitions(${PROJECT_NAME} INTERFACE
-                          HVR_RICHARD_LOADSHADER_DLL=${DLLIMPORT})
+                          HVR_RICHARD_LOADSHADER_DLL=${DLLIMPORT}
+                          HVR_RICHARD_LOADSHADERNEW_DLL=${DLLIMPORT})
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
-                          HVR_RICHARD_LOADSHADER_DLL=${DLLEXPORT})
+                          HVR_RICHARD_LOADSHADER_DLL=${DLLEXPORT}
+                          HVR_RICHARD_LOADSHADERNEW_DLL=${DLLEXPORT})
 
 target_include_directories(${PROJECT_NAME} PUBLIC
                           $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
