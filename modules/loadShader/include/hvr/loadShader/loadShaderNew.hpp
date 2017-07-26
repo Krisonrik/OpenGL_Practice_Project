@@ -1,15 +1,17 @@
 #ifndef LOADSHADERNEW_HPP
 #define LOADSHADERNEW_HPP
-
+HVR_WINDOWS_DISABLE_ALL_WARNING
+#include "glm/glm.hpp"
+HVR_WINDOWS_ENABLE_ALL_WARNING
 class loadShaderNew
 {
  public:
   // constructor generates the shader on the fly
   // ------------------------------------------------------------------------
   HVR_RICHARD_LOADSHADERNEW_DLL
-  loadShaderNew(const std::string vertexPath,
-                const std::string fragmentPath,
-                const std::string geometryPath = "");
+  loadShaderNew(const std::string &vertexPath,
+                const std::string &fragmentPath,
+                const std::string &geometryPath = "");
 
   // loadShaderNew(const loadShaderNew &loadshadernew);
 
@@ -68,8 +70,6 @@ class loadShaderNew
   std::ifstream fShaderFile;
   std::ifstream gShaderFile;
 
-  const char *vShaderCode = vertexCode.c_str();
-  const char *fShaderCode = fragmentCode.c_str();
   // utility function for checking shader compilation/linking errors.
   // ------------------------------------------------------------------------
   void checkCompileErrors(GLuint shader, std::string type);

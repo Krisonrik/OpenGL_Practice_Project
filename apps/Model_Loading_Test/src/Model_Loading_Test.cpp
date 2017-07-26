@@ -210,9 +210,9 @@ int main()
 
   // glm::vec3 lightAmbient  = glm::vec3(0.2f, 0.2f, 0.2f);
   // glm::vec3 lightDiffuse  = glm::vec3(1.0f, 1.0f, 1.0f);
-  glm::vec3 lightSpecular = glm::vec3(2.0f, 2.0f, 2.0f);
+  glm::vec3 lightSpecular = glm::vec3(1.0f, 1.0f, 1.0f);
   glm::vec3 lightPos(.2f, 1.0f, .3f);
-  glm::vec3 lightColor(5.0f, 5.0f, 5.0f);
+  glm::vec3 lightColor(.5f, .5f, .5f);
   float lightCutoff      = glm::cos(glm::radians(12.5f));
   float lightOuterCutoff = glm::cos(glm::radians(15.0f));
 

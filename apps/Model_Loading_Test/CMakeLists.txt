@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.7)
-project(Model_Loading_Assimp)
+project(Model_Loading_Test)
 
 if(MSVC)
   set(DISABLE "__pragma(warning(push,0))")
@@ -7,7 +7,7 @@ if(MSVC)
 endif()
 
 set(PROJECT_SRCS
-${PROJECT_SOURCE_DIR}/src/Model_Loading_Assimp.cpp
+${PROJECT_SOURCE_DIR}/src/Model_Loading_Test.cpp
 )
 
 find_package(OpenCV REQUIRED )

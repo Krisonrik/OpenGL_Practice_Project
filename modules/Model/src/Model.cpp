@@ -23,14 +23,12 @@ HVR_WINDOWS_ENABLE_ALL_WARNING
 #include "hvr\loadMesh\loadMesh.hpp"
 #include "hvr\loadShader\loadShaderNew.hpp"
 
-Model::Model(std::string path, unsigned int &textureUnit)
+Model::Model(std::string &path)  //, unsigned int &textureUnit)
 {
-  getTextureUnit(textureUnit);
   loadModel(path);
-  setTextureUnit(textureUnit);
 }
 Model::~Model(){};
-void Model::loadModel(std::string path)
+void Model::loadModel(std::string &path)
 {
   Assimp::Importer import;
   const aiScene *scene =
@@ -41,8 +39,9 @@ void Model::loadModel(std::string path)
     std::cout << "ERROR::ASSIMP::" << import.GetErrorString() << std::endl;
     return;
   }
-  directory = path.substr(0, path.find_last_of('/'));
-
+  // std::cout << path << std::endl;
+  directory_ = path.substr(0, path.find_last_of('\\'));
+  // std::cout << directory_ << std::endl;
   processNode(scene->mRootNode, scene);
 }
 
@@ -76,7 +75,6 @@ loadMesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
     vector.y        = mesh->mVertices[i].y;
     vector.z        = mesh->mVertices[i].z;
     vertex.Position = vector;
-    vertices.push_back(vertex);
     if (mesh->mNormals)
     {
       vector.x      = mesh->mNormals[i].x;
@@ -87,13 +85,19 @@ loadMesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
     if (mesh->mTextureCoords[0])
     {
       glm::vec2 vec;
-      vec.x = mesh->mTextureCoords[0][i].x;
-      vec.y = mesh->mTextureCoords[0][i].y;
+      vec.x            = mesh->mTextureCoords[0][i].x;
+      vec.y            = mesh->mTextureCoords[0][i].y;
+      vertex.TexCoords = vec;
+      // std::cout << vec.x << std::endl;
+      // std::cout << vec.y << std::endl;
     }
     else
     {
+      std::cout << "UV not loaded" << std::endl;
+
       vertex.TexCoords = glm::vec2(0.0f, 0.0f);
     }
+    vertices.push_back(vertex);
   }
   // process indices
   for (unsigned int i = 0; i < mesh->mNumFaces; i++)
@@ -108,14 +112,15 @@ loadMesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
   if (mesh->mMaterialIndex > 0)
   {
     aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
-    textureUnit_ += 1;
     std::vector<loadMesh::Texture> diffuseMaps = loadMaterialTextures(
         material, aiTextureType_DIFFUSE, "texture_diffuse");
     textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-    textureUnit_ += 1;
     std::vector<loadMesh::Texture> specularMaps = loadMaterialTextures(
         material, aiTextureType_SPECULAR, "texture_specular");
     textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+    std::vector<loadMesh::Texture> normalMaps =
+        loadMaterialTextures(material, aiTextureType_NORMALS, "texture_normal");
+    textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
   }
 
   return loadMesh::loadMesh(vertices, indices, textures);
@@ -130,6 +135,7 @@ std::vector<loadMesh::Texture> Model::loadMaterialTextures(aiMaterial *mat,
   {
     aiString str;
     mat->GetTexture(type, i, &str);
+    str       = directory_ + "\\" + std::string(str.C_Str());
     bool skip = false;
     for (unsigned int j = 0; j < textures_loaded.size(); j++)
     {
@@ -144,9 +150,11 @@ std::vector<loadMesh::Texture> Model::loadMaterialTextures(aiMaterial *mat,
     {
       loadImg image;
       unsigned int textureId = 0;
-      image.loadImgs(str.C_Str(), textureId, textureUnit_, false);
-      texture_.id   = textureId;
-      texture_.type = (char)type;
+
+      image.loadImgs(str.C_Str(), textureId, true);
+      texture_.id = textureId;
+      // std::cout << textureId << std::endl;
+      texture_.type = typeName;
       texture_.path = str;
       textures.push_back(texture_);
     }
@@ -160,14 +168,4 @@ void Model::Draw(loadShaderNew &shader)
   {
     meshes[i].Draw(shader);
   }
-}
-
-void Model::getTextureUnit(unsigned int &textureUnit)
-{
-  textureUnit_ = textureUnit;
-}
-
-void Model::setTextureUnit(unsigned int &textureUnit)
-{
-  textureUnit = textureUnit_;
 }

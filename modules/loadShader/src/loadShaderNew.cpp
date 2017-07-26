@@ -10,13 +10,15 @@ HVR_WINDOWS_ENABLE_ALL_WARNING
 
 // constructor generates the shader on the fly
 // ------------------------------------------------------------------------
-loadShaderNew::loadShaderNew(const std::string vertexPath,
-                             const std::string fragmentPath,
-                             const std::string geometryPath)
+loadShaderNew::loadShaderNew(const std::string &vertexPath,
+                             const std::string &fragmentPath,
+                             const std::string &geometryPath)
 {
+  // std::cout << vertexPath << std::endl;
+  // std::cout << fragmentPath << std::endl;
   // open files
-  vShaderFile.open(vertexPath.c_str());
-  fShaderFile.open(fragmentPath.c_str());
+  vShaderFile.open(vertexPath);
+  fShaderFile.open(fragmentPath);
   std::stringstream vShaderStream, fShaderStream;
   // read file's buffer contents into streams
   vShaderStream << vShaderFile.rdbuf();
@@ -27,6 +29,9 @@ loadShaderNew::loadShaderNew(const std::string vertexPath,
   // convert stream into string
   vertexCode   = vShaderStream.str();
   fragmentCode = fShaderStream.str();
+
+  // std::cout << fragmentCode << std::endl;
+
   // if geometry shader path is present, also load a geometry shader
   if (geometryPath != "")
   {
@@ -36,6 +41,9 @@ loadShaderNew::loadShaderNew(const std::string vertexPath,
     gShaderFile.close();
     geometryCode = gShaderStream.str();
   }
+
+  const char *vShaderCode = vertexCode.c_str();
+  const char *fShaderCode = fragmentCode.c_str();
 
   // 2. compile shaders
   unsigned int vertex, fragment;

@@ -19,11 +19,11 @@ HVR_WINDOWS_ENABLE_ALL_WARNING
 loadImg::loadImg(){};
 loadImg::~loadImg(){};
 void loadImg::loadImgs(const char* imgDirChar,
-                       unsigned int texture,
-                       unsigned int textureUnit,
+                       unsigned int& texture,
                        bool hasAlpha)
 {
   cv::Mat image;
+  std::cout << imgDirChar << std::endl;
   if (hasAlpha)
   {
     image = cv::imread(imgDirChar, 1);
@@ -39,9 +39,9 @@ void loadImg::loadImgs(const char* imgDirChar,
 
   glGenTextures(1, &texture);
 
-  glActiveTexture(
+  /* glActiveTexture(
       GL_TEXTURE0 +
-      textureUnit);  // activate the texture unit first before binding texture
+      textureUnit);*/  // activate the texture unit first before binding texture
   glBindTexture(GL_TEXTURE_2D, texture);
 
   // set the texture wrapping/filtering options (on the currently bound texture
