@@ -35,7 +35,8 @@ endif()
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
                           ${OpenCV_INCLUDE_DIRS}
                           # ${GLEW_INCLUDE_PATH}
-                          ${ASSIMP_ROOT_DIR}/include
+                          ${ASSIMP_INCLUDE_DIR}
+                          # ${ASSIMP_ROOT_DIR}/include
                           ${OPENGL_INCLUDE_DIR}
                           # ${TINYXML2_INCLUDE_DIRS}
                           )

@@ -53,7 +53,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
                           ${OpenCV_INCLUDE_DIRS}
                           #${GLEW_INCLUDE_PATH}
-                          ${ASSIMP_ROOT_DIR}/include
+                          ${ASSIMP_INCLUDE_DIR}
+                          # ${ASSIMP_ROOT_DIR}/include
                           ${OPENGL_INCLUDE_DIR})
 # set(ASSIMP_LIB 
 #   C:/Libraries/vcpkg/packages/assimp_x64-windows/lib)

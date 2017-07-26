@@ -12,8 +12,8 @@ HVR_WINDOWS_DISABLE_ALL_WARNING
 #include <string.h>
 //#define GLEW_STATIC
 #include <GL/glew.h>
-#include <assimp\Importer.hpp>
 #include <glm\glm.hpp>
+#include "assimp\Importer.hpp"
 
 HVR_WINDOWS_ENABLE_ALL_WARNING
 #include "hvr/loadMesh/loadMesh.hpp"
