@@ -19,6 +19,9 @@ HVR_WINDOWS_DISABLE_ALL_WARNING
 #include <glm/ext.hpp>
 #include <glm/gtx/string_cast.hpp>
 
+#include "tinyxml2.h"
+HVR_WINDOWS_ENABLE_ALL_WARNING
+
 #include "hvr/cameraEuler/cameraEuler.hpp"
 #include "hvr/loadAssetDir/loadAssetDir.hpp"
 #include "hvr/loadImg/loadImg.hpp"
@@ -26,10 +29,6 @@ HVR_WINDOWS_DISABLE_ALL_WARNING
 #include "hvr\Model\Model.hpp"
 //#include "hvr\loadMesh\loadMesh.hpp"
 #include "hvr\loadShader\loadShaderNew.hpp"
-
-#include "tinyxml2.h"
-
-HVR_WINDOWS_ENABLE_ALL_WARNING
 
 cameraEuler curCam(glm::vec3(0.0f, 0.0f, 3.0f));
 
@@ -41,14 +40,13 @@ float pitch = 0.0f, yaw = 0.0f;
 bool firstMouse = true;
 float fov       = 45.0f;
 
-void key_callback(GLFWwindow* window, int key, int, int action, int)
+void key_callback(GLFWwindow* window)
 {
   // When a user presses the escape key, we set the WindowShouldClose property
   // to true, closing the application
-  if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-    glfwSetWindowShouldClose(window, GL_TRUE);
-  // float cameraSpeed = 2.5f * deltaTime;
-  // float cameraSpeed = 0.05f; // adjust accordingly
+  if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    glfwSetWindowShouldClose(window, true);
+
   if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
     curCam.ProcessKeyboard(FORWARD, deltaTime);
   if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -232,7 +230,8 @@ int main()
   {
     // Check and call events
     glfwPollEvents();
-    glfwSetKeyCallback(window, key_callback);
+    // glfwSetKeyCallback(window, key_callback);
+    key_callback(window);
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
 

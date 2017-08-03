@@ -26,12 +26,12 @@ void loadImg::loadImgs(const char* imgDirChar,
   std::cout << imgDirChar << std::endl;
   if (hasAlpha)
   {
-    image = cv::imread(imgDirChar, 1);
+    image = cv::imread(imgDirChar, -1);
     cv::cvtColor(image, image, cv::COLOR_BGRA2RGBA);
   }
   else
   {
-    image = cv::imread(imgDirChar, -1);
+    image = cv::imread(imgDirChar, 1);
     cv::cvtColor(image, image, cv::COLOR_BGR2RGB);
   }
 
@@ -57,7 +57,7 @@ void loadImg::loadImgs(const char* imgDirChar,
     {
       glTexImage2D(GL_TEXTURE_2D,
                    0,
-                   GL_RGB,
+                   GL_RGBA,
                    image.cols,
                    image.rows,
                    0,

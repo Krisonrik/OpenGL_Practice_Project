@@ -35,6 +35,7 @@ ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_lamp.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_lighting_maps.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_lighting_casters.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/vertex_shader_lighting_multiple.glsl
+${PROJECT_SOURCE_DIR}/include/hvr/glsl/1.1.depth_testing.vs
 
 # ${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader.glsl
 # ${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_excercise3.glsl
@@ -49,7 +50,7 @@ ${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_lamp.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_lighting_maps.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_lighting_casters.glsl
 ${PROJECT_SOURCE_DIR}/include/hvr/glsl/fragment_shader_lighting_multiple.glsl
-
+${PROJECT_SOURCE_DIR}/include/hvr/glsl/1.1.depth_testing.fs
 )
 
 source_group("include" FILES ${PROJECT_INCS})

@@ -38,14 +38,13 @@ float pitch = 0.0f, yaw = 0.0f;
 bool firstMouse = true;
 float fov       = 45.0f;
 
-void key_callback(GLFWwindow* window, int key, int, int action, int)
+void key_callback(GLFWwindow* window)
 {
   // When a user presses the escape key, we set the WindowShouldClose property
   // to true, closing the application
-  if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-    glfwSetWindowShouldClose(window, GL_TRUE);
-  // float cameraSpeed = 2.5f * deltaTime;
-  // float cameraSpeed = 0.05f; // adjust accordingly
+  if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    glfwSetWindowShouldClose(window, true);
+
   if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
     curCam.ProcessKeyboard(FORWARD, deltaTime);
   if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -238,18 +237,18 @@ int main()
   const char* imgDirChar = imgDir.data();
   unsigned int texture1 = 0, texture2 = 0, texture3 = 0;
   // bool hasAlpha = false;
-  imgLoader.loadImgs(imgDirChar, texture1, 0, false);
+  imgLoader.loadImgs(imgDirChar, texture1, false);
   // std::cout << imgDirChar << std::endl;
 
   img        = "container2_specular.png";
   imgDir     = assetDir + dirPadding + img;
   imgDirChar = imgDir.data();
-  imgLoader.loadImgs(imgDirChar, texture2, 1, false);
+  imgLoader.loadImgs(imgDirChar, texture2, false);
 
   img        = "matrix.jpg";
   imgDir     = assetDir + dirPadding + img;
   imgDirChar = imgDir.data();
-  imgLoader.loadImgs(imgDirChar, texture3, 2, false);
+  imgLoader.loadImgs(imgDirChar, texture3, false);
 
   float timeDelate = 0.0f;
 
@@ -282,7 +281,8 @@ int main()
   {
     // Check and call events
     glfwPollEvents();
-    glfwSetKeyCallback(window, key_callback);
+    // glfwSetKeyCallback(window, key_callback);
+    key_callback(window);
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
 
