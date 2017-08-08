@@ -10,10 +10,12 @@ endif()
 
 set(PROJECT_SRCS
 ${PROJECT_SOURCE_DIR}/src/loadImg.cpp
+${PROJECT_SOURCE_DIR}/src/loadImgManual.cpp
 )
 
 set(PROJECT_INCS
 ${PROJECT_SOURCE_DIR}/include/hvr/loadImg/loadImg.hpp
+${PROJECT_SOURCE_DIR}/include/hvr/loadImg/loadImgManual.hpp
 )
 
 source_group("include" FILES ${PROJECT_INCS})
@@ -37,10 +39,12 @@ endif()
 
 
 target_compile_definitions(${PROJECT_NAME} INTERFACE
-                          HVR_RICHARD_LOADIMG_DLL=${DLLIMPORT})
+                          HVR_RICHARD_LOADIMG_DLL=${DLLIMPORT}
+                          HVR_RICHARD_LOADIMGMANUAL_DLL=${DLLIMPORT})
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
-                          HVR_RICHARD_LOADIMG_DLL=${DLLEXPORT})
+                          HVR_RICHARD_LOADIMG_DLL=${DLLEXPORT}
+                          HVR_RICHARD_LOADIMGMANUAL_DLL=${DLLEXPORT})
 
 target_include_directories(${PROJECT_NAME} PUBLIC
                           $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>

@@ -81,6 +81,7 @@ void loadMesh::setupMesh()
 void loadMesh::Draw(loadShaderNew &shader)
 {
   // bind appropriate textures
+  // unsigned int textureUnit = 0;
   unsigned int diffuseNr  = 1;
   unsigned int specularNr = 1;
   unsigned int normalNr   = 1;
@@ -112,6 +113,7 @@ void loadMesh::Draw(loadShaderNew &shader)
     // and finally bind the texture
     glBindTexture(GL_TEXTURE_2D, textures_[i].id);
     // std::cout << textures_[i].id << std::endl;
+    // textureUnit = i;
   }
 
   // draw mesh
@@ -122,4 +124,5 @@ void loadMesh::Draw(loadShaderNew &shader)
 
   // always good practice to set everything back to defaults once configured.
   glActiveTexture(GL_TEXTURE0);
+  // return textureUnit;
 }
