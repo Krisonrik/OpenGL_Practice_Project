@@ -21,6 +21,9 @@ class Model
   HVR_RICHARD_MODEL_DLL
   void Draw(loadShaderNew &shader);
 
+  HVR_RICHARD_MODEL_DLL
+  const std::vector<loadMesh> &getMeshes() const;
+
  private:
   /*  Model Data  */
   std::vector<loadMesh> meshes;

@@ -169,3 +169,8 @@ void Model::Draw(loadShaderNew &shader)
     meshes[i].Draw(shader);
   }
 }
+
+const std::vector<loadMesh> &Model::getMeshes() const
+{
+  return meshes;
+}

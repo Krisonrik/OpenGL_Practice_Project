@@ -32,6 +32,12 @@ class loadMesh
   HVR_RICHARD_LOADMESH_DLL
   void Draw(loadShaderNew &shader);
 
+  HVR_RICHARD_LOADMESH_DLL
+  unsigned int getVAO() const;
+
+  HVR_RICHARD_LOADMESH_DLL
+  const std::vector<unsigned int> &getIndices() const;
+
  private:
   /*  Mesh Data  */
   std::vector<Vertex> vertices_;

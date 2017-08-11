@@ -126,3 +126,13 @@ void loadMesh::Draw(loadShaderNew &shader)
   glActiveTexture(GL_TEXTURE0);
   // return textureUnit;
 }
+
+unsigned int loadMesh::getVAO() const
+{
+  return VAO;
+}
+
+const std::vector<unsigned int> &loadMesh::getIndices() const
+{
+  return indices_;
+}
